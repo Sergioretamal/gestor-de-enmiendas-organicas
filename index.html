@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enmiendas Orgánicas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="js/Enmienda.js"></script>
+    <script src="js/funciones.js"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center">Gestor de enmiendas agroecológicos</h2>
+        <div id="mensajes"></div>
+        <form id="enmiendasform">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="codigo" class="form-label">Código</label>
+                    <input type="text" class="form-control" id="txtcodigo" required>
+                </div>
+                <div class="col-md-1 mb-1">
+                    <label class="form-label" style="visibility: hidden;">Consultar</label> <!-- Para alinear los elementos -->
+                    <button type="button" class="btn btn-success" onclick="consultar()">...</button>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="nombre" class="form-label text-center">Nombre</label>
+                    <input type="text" class="form-control" id="txtnom" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="txtdesc" rows="3" required></textarea>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="marca" class="form-label">Marca</label>
+                    <input type="text" class="form-control" id="txtmarca" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="Proveedor" class="form-label">Proveedor</label>
+                    <input type="text" class="form-control" id="txtpro" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <select class="form-control" id="txtcat" required>
+                        <option value="">Seleccione</option>
+                        <option value="Sustrato">Sustrato</option>
+                        <option value="Abonos">Abonos</option>
+                        <option value="Bioestimulantes">Bioestimulantes</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-check-label" for="opdisp">Disponibilidad</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="disponibilidad" id="disponible" value="Disponible" required>
+                            <label class="form-check-label" for="disponible">Disponible</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="disponibilidad" id="noDisponible" value="No Disponible" required>
+                            <label class="form-check-label" for="noDisponible">No Disponible</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="prec" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="stock" class="form-label">Stock</label>
+                    <input type="number" class="form-control" id="txtstock" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="Estado" class="form-label">Formato</label>
+                    <select class="form-control" id="txtFormato" required>
+                        <option value="">Seleccione</option>
+                        <option value="1 litro">1 litro</option>
+                        <option value="2 litros">2 litros</option>
+                        <option value="20 litros">20 litros</option>
+                        <option value="40 litros">40 litros</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-check-label" for="optip">Tipo</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipo" id="EnmiendaSolida" value="EnmiedaSolida" required>
+                            <label class="form-check-label" for="EnmiedaSolida">EnmiendaSolida</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipo" id="EnmiedaLiquida" value="EnmiedaLiquida" required>
+                            <label class="form-check-label" for="EnmiedaLiquida">EnmiendaLiquida</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="Despacho" class="form-label">Despacho</label>
+                    <select class="form-control" id="txtdespacho" required>
+                        <option value="">Seleccione</option>
+                        <option value="BlueExpress">BlueExpress</option>
+                        <option value="Starken">Starken</option>
+                        <option value="Chilexpress">Chilexpress</option>
+                        <option value="Chilexpress">Retiro Sucursal</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-3 mb-3">
+                    <button type="submit" class="btn btn-primary w-100"onclick="registrar()">Registrar</button>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <button type="button" class="btn btn-warning w-100" onclick="modificar()">Modificar</button>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <button type="button" class="btn btn-danger w-100" onclick="eliminar()">Eliminar</button>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Marca</th>
+                        <th>Proveedor</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>Disponibilidad</th>
+                        <th>Stock</th>
+                        <th>Tipo</th>
+                        <th>Formato</th>
+                        <th>Despacho</th>
+                    </tr>
+                </thead>
+                <tbody id="tabladedatos">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
